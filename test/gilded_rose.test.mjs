@@ -106,6 +106,12 @@ describe("Gilded Rose", () => {
     expect(items[0].quality).to.equal(80);
   })
 
+  test("Sulfuras doesn't lose quality past sellIn date", () => {
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 80)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(80);
+  })
+
   test("Sulfuras sellIn doesn't decrease", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 80)]);
     const items = gildedRose.updateQuality();
