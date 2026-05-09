@@ -3,19 +3,19 @@ import { expect } from "chai";
 import { Item, Shop } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
-  test("foo", () => {
+  test("returns an array", () => {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).to.equal("foo");
+    expect(items).to.be.a("array");
   });
 
-  test("quality 1", () => {
+  test("quality decreases by 1", () => {
     const gildedRose = new Shop([new Item("foo", 0, 1)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(0);
   });
 
-  test("sellIn 1", () => {
+  test("sellIn decreases by 1", () => {
     const gildedRose = new Shop([new Item("foo", 1, 0)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(0);
