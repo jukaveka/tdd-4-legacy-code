@@ -40,16 +40,23 @@ describe("Gilded Rose", () => {
   })
 
   test("backstage pass increases with sellIn date left", () => {
-    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 12, 10)]);
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(11);
   });
 
   test("backstage pass quality increases 2 with 10 or less days to sell", () => {
-    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10)]);
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 6, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(12);
   });
+
+  test("backstage pass quality doesn't increase past 50 with 10 or less days to sell", () => {
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 6, 50)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(50);
+  });
+
 
   test("backstage pass quality increases 3 with 5 or less days to sell", () => {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10)]);
