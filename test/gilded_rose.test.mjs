@@ -27,6 +27,12 @@ describe("Gilded Rose", () => {
     expect(items[0].quality).to.equal(8);
   });
 
+  test("quality doesn't decrease past 0 after sellIn date", () => {
+    const gildedRose = new Shop([new Item("foo", -1, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(0);
+  })
+
   test("sellIn decreases by 1", () => {
     const gildedRose = new Shop([new Item("foo", 1, 0)]);
     const items = gildedRose.updateQuality();
