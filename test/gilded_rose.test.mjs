@@ -15,19 +15,19 @@ describe("Gilded Rose", () => {
     expect(items[0].quality).to.equal(0);
   });
 
+  test("quality decreases by 2 past sellIn date", () => {
+    const gildedRose = new Shop([new Item("foo", -1, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(8);
+  });
+
   test("sellIn decreases by 1", () => {
     const gildedRose = new Shop([new Item("foo", 1, 0)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(0);
   });
 
-  test("quality doesn't decrease if already 0", () => {
-    const gildedRose = new Shop([new Item("foo", 1, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].quality).to.equal(0);
-  })
-
-  test("quality doesn't decrease if already 0", () => {
+  test("quality doesn't decrease if past 0", () => {
     const gildedRose = new Shop([new Item("foo", 1, 0)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(0);
