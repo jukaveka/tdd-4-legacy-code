@@ -21,6 +21,12 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(0);
   });
 
+  test("quality doesn't decrease if already 0", () => {
+    const gildedRose = new Shop([new Item("foo", 1, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(0);
+  })
+
   test("backstage pass increases with sellIn date left", () => {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10)]);
     const items = gildedRose.updateQuality();
