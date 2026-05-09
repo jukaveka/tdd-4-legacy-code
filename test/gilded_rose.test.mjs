@@ -9,6 +9,12 @@ describe("Gilded Rose", () => {
     expect(items).to.be.a("array");
   });
 
+  test("returns empty array with no items", () => {
+    const gildedRose = new Shop();
+    const items = gildedRose.updateQuality();
+    expect(items).to.be.a("array").and.to.be.empty;  
+  })
+
   test("quality decreases by 1", () => {
     const gildedRose = new Shop([new Item("foo", 0, 1)]);
     const items = gildedRose.updateQuality();
