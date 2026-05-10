@@ -14,7 +14,9 @@ export class Item {
   }
 
   decreaseQuality(decrement) {
-    this.quality = this.quality - decrement;
+    if (this.qualityCanDecrease()) {
+      this.quality = this.quality - decrement;
+    }
   }
 
   increaseQuality(increment) {
@@ -38,10 +40,8 @@ export class Shop {
   updateQuality() {
     this.items.forEach((item) => {
       if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
-        if (item.qualityCanDecrease()) {
           if (item.name != "Sulfuras, Hand of Ragnaros") {
             item.decreaseQuality(1);
-          }
         }
       } else {
         if (item.qualityCanIncrease()) {
@@ -66,10 +66,8 @@ export class Shop {
       if (item.sellInIsBelow(0)) {
         if (item.name != "Aged Brie") {
           if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
-            if (item.qualityCanDecrease()) {
-              if (item.name != "Sulfuras, Hand of Ragnaros") {
-                item.decreaseQuality(1);
-              }
+            if (item.name != "Sulfuras, Hand of Ragnaros") {
+              item.decreaseQuality(1);
             }
           } else {
             item.decreaseQuality(item.quality);
