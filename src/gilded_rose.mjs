@@ -20,8 +20,8 @@ export class Item {
     }
   }
 
-  decreaseSellIn() {
-    this.sellIn = this.sellIn - 1;
+  adjustSellIn() {
+    this.sellIn = this.sellIn - this.adjustments.sellIn;
   }
 
   sellInIsBelow(days) {
@@ -69,7 +69,7 @@ export class Shop {
         }
       }
       if (item.name != "Sulfuras, Hand of Ragnaros") {
-        item.decreaseSellIn();
+        item.adjustSellIn();
       }
       if (item.sellInIsBelow(0)) {
         if (item.name != "Aged Brie") {
