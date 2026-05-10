@@ -36,51 +36,51 @@ export class Shop {
   }
 
   updateQuality() {
-    for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].name != "Aged Brie" && this.items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-        if (this.items[i].qualityCanDecrease()) {
-          if (this.items[i].name != "Sulfuras, Hand of Ragnaros") {
-            this.items[i].decreaseQuality(1);
+    this.items.forEach((item) => {
+      if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
+        if (item.qualityCanDecrease()) {
+          if (item.name != "Sulfuras, Hand of Ragnaros") {
+            item.decreaseQuality(1);
           }
         }
       } else {
-        if (this.items[i].qualityCanIncrease()) {
-          this.items[i].increaseQuality(1);
-          if (this.items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
-            if (this.items[i].sellInIsBelow(11)) {
-              if (this.items[i].qualityCanIncrease()) {
-                this.items[i].increaseQuality(1);
+        if (item.qualityCanIncrease()) {
+          item.increaseQuality(1);
+          if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+            if (item.sellInIsBelow(11)) {
+              if (item.qualityCanIncrease()) {
+                item.increaseQuality(1);
               }
             }
-            if (this.items[i].sellInIsBelow(6)) {
-              if (this.items[i].qualityCanIncrease()) {
-                this.items[i].increaseQuality(1);
+            if (item.sellInIsBelow(6)) {
+              if (item.qualityCanIncrease()) {
+                item.increaseQuality(1);
               }
             }
           }
         }
       }
-      if (this.items[i].name != "Sulfuras, Hand of Ragnaros") {
-        this.items[i].decreaseSellIn();
+      if (item.name != "Sulfuras, Hand of Ragnaros") {
+        item.decreaseSellIn();
       }
-      if (this.items[i].sellInIsBelow(0)) {
-        if (this.items[i].name != "Aged Brie") {
-          if (this.items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
-            if (this.items[i].qualityCanDecrease()) {
-              if (this.items[i].name != "Sulfuras, Hand of Ragnaros") {
-                this.items[i].decreaseQuality(1);
+      if (item.sellInIsBelow(0)) {
+        if (item.name != "Aged Brie") {
+          if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
+            if (item.qualityCanDecrease()) {
+              if (item.name != "Sulfuras, Hand of Ragnaros") {
+                item.decreaseQuality(1);
               }
             }
           } else {
-            this.items[i].decreaseQuality(this.items[i].quality);
+            item.decreaseQuality(item.quality);
           }
         } else {
-          if (this.items[i].qualityCanIncrease()) {
-            this.items[i].increaseQuality(1);
+          if (item.qualityCanIncrease()) {
+            item.increaseQuality(1);
           }
         }
       }
-    }
+    })
 
     return this.items;
   }
