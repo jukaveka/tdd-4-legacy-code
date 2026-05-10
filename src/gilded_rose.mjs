@@ -50,8 +50,11 @@ export class Item {
   }
 
   adjustQuality() {
-    const timesToAdjust = Math.abs(this.adjustments.quality);
+    let timesToAdjust = Math.abs(this.adjustments.quality);
     const adjustment = this.adjustments.quality !== 0 ? this.adjustments.quality / timesToAdjust : 0;
+    if (this.name.includes("Conjured")) {
+      timesToAdjust = timesToAdjust * 2;
+    }
     for (let adjusted = 0; adjusted < timesToAdjust; adjusted++) {
       if (this.validQuality(adjustment)) {
         this.quality = this.quality - adjustment;
