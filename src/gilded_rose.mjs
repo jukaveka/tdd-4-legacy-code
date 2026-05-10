@@ -20,6 +20,10 @@ export class Item {
   qualityCanDecrease() {
     return this.quality > 0;
   }
+
+  qualityCanIncrease() {
+    return this.quality < 50;
+  }
 }
 
 export class Shop {
@@ -36,16 +40,16 @@ export class Shop {
           }
         }
       } else {
-        if (this.items[i].quality < 50) {
+        if (this.items[i].qualityCanIncrease()) {
           this.items[i].increaseQuality(1);
           if (this.items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
             if (this.items[i].sellIn < 11) {
-              if (this.items[i].quality < 50) {
+              if (this.items[i].qualityCanIncrease()) {
                 this.items[i].increaseQuality(1);
               }
             }
             if (this.items[i].sellIn < 6) {
-              if (this.items[i].quality < 50) {
+              if (this.items[i].qualityCanIncrease()) {
                 this.items[i].increaseQuality(1);
               }
             }
@@ -67,7 +71,7 @@ export class Shop {
             this.items[i].decreaseQuality(this.items[i].quality);
           }
         } else {
-          if (this.items[i].quality < 50) {
+          if (this.items[i].qualityCanIncrease()) {
             this.items[i].increaseQuality(1);
           }
         }
