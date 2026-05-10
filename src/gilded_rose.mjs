@@ -1,11 +1,23 @@
 export class Item {
-  SPECIAL_PRODUCTS = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros"];
+  SPECIAL_PRODUCTS = [
+    {name: "Aged Brie", adjustment: (-1)},
+    {name: "Backstage passes to a TAFKAL80ETC concert", adjustment: (-1)},
+    {name: "Sulfuras, Hand of Ragnaros", adjustment: 0},
+  ];
 
   constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
-    this.adjustment = 1;
+    this.adjustment = this.setAdjustment(name);
+  }
+
+  setAdjustment(name) {
+    if (this.SPECIAL_PRODUCTS.map((product) => product.name).includes(this.name)) {
+      return this.SPECIAL_PRODUCTS.filter((product) => product.name === name)[0].adjustment;
+    } else {
+      return 1;
+    }
   }
 
   decreaseSellIn() {
@@ -48,7 +60,7 @@ export class Item {
   }
 
   isNormalProduct() {
-    return !this.SPECIAL_PRODUCTS.includes(this.name);
+    return !this.SPECIAL_PRODUCTS.map((product) => product.name).includes(this.name);
   }
 }
 
@@ -62,13 +74,13 @@ export class Shop {
       if (item.isNormalProduct()) {
           item.adjustQuality();
       } else {
-        item.increaseQuality(1);
+        item.adjustQuality();
         if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
           if (item.sellInIsBelow(11)) {
-            item.increaseQuality(1);
+            item.adjustQuality();
           }
           if (item.sellInIsBelow(6)) {
-            item.increaseQuality(1);
+            item.adjustQuality();
           }
         }
       }
@@ -85,7 +97,7 @@ export class Shop {
             item.emptyQuality();
           }
         } else {
-          item.increaseQuality(1);
+          item.adjustQuality();
         }
       }
     })
