@@ -1,4 +1,6 @@
 export class Item {
+  SPECIAL_PRODUCTS = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros"];
+
   constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
@@ -32,6 +34,10 @@ export class Item {
   qualityCanIncrease() {
     return this.quality < 50;
   }
+
+  isNormalProduct() {
+    return !this.SPECIAL_PRODUCTS.includes(this.name);
+  }
 }
 
 export class Shop {
@@ -41,10 +47,8 @@ export class Shop {
 
   updateQuality() {
     this.items.forEach((item) => {
-      if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.name != "Sulfuras, Hand of Ragnaros") {
-            item.decreaseQuality(1);
-        }
+      if (item.isNormalProduct()) {
+          item.decreaseQuality(1);
       } else {
         item.increaseQuality(1);
         if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
