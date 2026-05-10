@@ -21,6 +21,26 @@ export class Item {
     }
   }
 
+  checkAdjustments() {
+    if (this.sellInIsBelow(0)) {
+      const sign = Math.sign(this.adjustments.quality);
+      this.adjustments.quality = 2 * sign;
+    }
+
+    if (this.sellInIsBelow(11) && this.name == "Backstage passes to a TAFKAL80ETC concert") {
+      this.adjustments.quality = -2;
+    }
+
+    if (this.sellInIsBelow(6) && this.name == "Backstage passes to a TAFKAL80ETC concert") {
+      this.adjustments.quality = -3;
+    }
+
+    if (this.sellInIsBelow(0) && this.name == "Backstage passes to a TAFKAL80ETC concert") {
+      this.adjustments.quality = 0;
+      this.emptyQuality();
+    }
+  }
+
   adjustSellIn() {
     this.sellIn = this.sellIn - this.adjustments.sellIn;
   }
@@ -30,8 +50,12 @@ export class Item {
   }
 
   adjustQuality() {
-    if (this.validQuality(this.adjustments.quality)) {
-      this.quality = this.quality - this.adjustments.quality;
+    const timesToAdjust = Math.abs(this.adjustments.quality);
+    const adjustment = this.adjustments.quality !== 0 ? this.adjustments.quality / timesToAdjust : 0;
+    for (let adjusted = 0; adjusted < timesToAdjust; adjusted++) {
+      if (this.validQuality(adjustment)) {
+        this.quality = this.quality - adjustment;
+      }
     }
   }
 
@@ -56,25 +80,9 @@ export class Shop {
 
   updateQuality() {
     this.items.forEach((item) => {
+      item.checkAdjustments();
       item.adjustQuality();
-      if (!item.isNormalProduct()) {
-        if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.sellInIsBelow(11)) {
-            item.adjustQuality();
-          }
-          if (item.sellInIsBelow(6)) {
-            item.adjustQuality();
-          }
-        }
-      }
       item.adjustSellIn();
-      if (item.sellInIsBelow(0)) {
-        if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
-          item.emptyQuality();
-        } else {
-          item.adjustQuality();
-        }
-      }
     });
 
     return this.items;
