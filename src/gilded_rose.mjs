@@ -13,10 +13,9 @@ export class Item {
   }
 
   determineAdjustments(name) {
-    if (this.SPECIAL_PRODUCTS.map((product) => product.name).includes(this.name)) {
-      return this.SPECIAL_PRODUCTS.filter((product) => product.name === name).map((product) => {
-        return { quality: product.quality, sellIn: product.sellIn };
-      })[0];
+    if (!this.isNormalProduct()) {
+      const product = this.SPECIAL_PRODUCTS.filter((product) => product.name === name)[0]
+      return { quality: product.quality, sellIn: product.sellIn }
     } else {
       return { quality: 1, sellIn: 1 };
     }
