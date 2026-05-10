@@ -68,9 +68,7 @@ export class Shop {
           }
         }
       }
-      if (item.name != "Sulfuras, Hand of Ragnaros") {
-        item.adjustSellIn();
-      }
+      item.adjustSellIn();
       if (item.sellInIsBelow(0)) {
         if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
           item.emptyQuality();
