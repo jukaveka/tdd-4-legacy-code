@@ -9,6 +9,10 @@ export class Item {
     this.sellIn = this.sellIn - 1;
   }
 
+  sellInIsBelow(days) {
+    return this.sellIn < days;
+  }
+
   decreaseQuality(decrement) {
     this.quality = this.quality - decrement;
   }
@@ -43,12 +47,12 @@ export class Shop {
         if (this.items[i].qualityCanIncrease()) {
           this.items[i].increaseQuality(1);
           if (this.items[i].name == "Backstage passes to a TAFKAL80ETC concert") {
-            if (this.items[i].sellIn < 11) {
+            if (this.items[i].sellInIsBelow(11)) {
               if (this.items[i].qualityCanIncrease()) {
                 this.items[i].increaseQuality(1);
               }
             }
-            if (this.items[i].sellIn < 6) {
+            if (this.items[i].sellInIsBelow(6)) {
               if (this.items[i].qualityCanIncrease()) {
                 this.items[i].increaseQuality(1);
               }
@@ -59,7 +63,7 @@ export class Shop {
       if (this.items[i].name != "Sulfuras, Hand of Ragnaros") {
         this.items[i].decreaseSellIn();
       }
-      if (this.items[i].sellIn < 0) {
+      if (this.items[i].sellInIsBelow(0)) {
         if (this.items[i].name != "Aged Brie") {
           if (this.items[i].name != "Backstage passes to a TAFKAL80ETC concert") {
             if (this.items[i].qualityCanDecrease()) {
