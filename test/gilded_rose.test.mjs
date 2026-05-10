@@ -128,4 +128,10 @@ describe("Gilded Rose", () => {
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(5);
   });
+
+  test("Conjured item quality decreases by 2", () => {
+    const gildedRose = new Shop([new Item("Conjured", 5, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).to.equal(8);
+  })
 });
