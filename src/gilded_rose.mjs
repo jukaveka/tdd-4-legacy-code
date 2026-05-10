@@ -5,6 +5,7 @@ export class Item {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
+    this.adjustment = 1;
   }
 
   decreaseSellIn() {
@@ -17,7 +18,7 @@ export class Item {
 
   decreaseQuality(decrement) {
     if (this.qualityCanDecrease()) {
-      this.quality = this.quality - decrement;
+      this.quality = this.quality - this.adjustment;
     }
   }
 
@@ -25,6 +26,10 @@ export class Item {
     if (this.qualityCanIncrease()) {
       this.quality = this.quality + increment;
     }
+  }
+
+  emptyQuality() {
+    this.quality = 0;
   }
 
   qualityCanDecrease() {
@@ -48,7 +53,7 @@ export class Shop {
   updateQuality() {
     this.items.forEach((item) => {
       if (item.isNormalProduct()) {
-          item.decreaseQuality(1);
+          item.decreaseQuality();
       } else {
         item.increaseQuality(1);
         if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
@@ -67,10 +72,10 @@ export class Shop {
         if (item.name != "Aged Brie") {
           if (item.name != "Backstage passes to a TAFKAL80ETC concert") {
             if (item.name != "Sulfuras, Hand of Ragnaros") {
-              item.decreaseQuality(1);
+              item.decreaseQuality();
             }
           } else {
-            item.decreaseQuality(item.quality);
+            item.emptyQuality();
           }
         } else {
           item.increaseQuality(1);
