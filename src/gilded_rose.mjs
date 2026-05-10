@@ -1,20 +1,20 @@
 export class Item {
   SPECIAL_PRODUCTS = [
-    {name: "Aged Brie", adjustment: (-1)},
-    {name: "Backstage passes to a TAFKAL80ETC concert", adjustment: (-1)},
-    {name: "Sulfuras, Hand of Ragnaros", adjustment: 0},
+    {name: "Aged Brie", quality: (-1)},
+    {name: "Backstage passes to a TAFKAL80ETC concert", quality: (-1)},
+    {name: "Sulfuras, Hand of Ragnaros", quality: 0},
   ];
 
   constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
-    this.adjustment = this.setAdjustment(name);
+    this.qualityAdjustment = this.determineQualityAdjustment(name);
   }
 
-  setAdjustment(name) {
+  determineQualityAdjustment(name) {
     if (this.SPECIAL_PRODUCTS.map((product) => product.name).includes(this.name)) {
-      return this.SPECIAL_PRODUCTS.filter((product) => product.name === name)[0].adjustment;
+      return this.SPECIAL_PRODUCTS.filter((product) => product.name === name)[0].quality;
     } else {
       return 1;
     }
@@ -29,8 +29,8 @@ export class Item {
   }
 
   adjustQuality() {
-    if (this.validQuality(this.adjustment)) {
-      this.quality = this.quality - this.adjustment;
+    if (this.validQuality(this.qualityAdjustment)) {
+      this.quality = this.quality - this.qualityAdjustment;
     }
   }
 
