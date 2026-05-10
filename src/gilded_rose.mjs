@@ -34,18 +34,6 @@ export class Item {
     }
   }
 
-  decreaseQuality(decrement) {
-    if (this.qualityCanDecrease()) {
-      this.quality = this.quality - this.adjustment;
-    }
-  }
-
-  increaseQuality(increment) {
-    if (this.qualityCanIncrease()) {
-      this.quality = this.quality + increment;
-    }
-  }
-
   emptyQuality() {
     this.quality = 0;
   }
@@ -53,10 +41,6 @@ export class Item {
   validQuality(adjustment) {
     const adjustedQuality = this.quality - adjustment;
     return adjustedQuality <= 50 && adjustedQuality >= 0;
-  }
-
-  qualityCanIncrease() {
-    return this.quality < 50;
   }
 
   isNormalProduct() {
