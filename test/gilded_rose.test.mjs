@@ -140,4 +140,10 @@ describe("Gilded Rose", () => {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(6);
   })
+
+  test("Conjured item quality doesn't decrease beyond 0", () => {
+    const gildedRose = new Shop([new Item("Conjured", -1, 2)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(0);
+  })
 });
