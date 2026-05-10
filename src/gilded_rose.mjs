@@ -57,10 +57,8 @@ export class Shop {
 
   updateQuality() {
     this.items.forEach((item) => {
-      if (item.isNormalProduct()) {
-        item.adjustQuality();
-      } else {
-        item.adjustQuality();
+      item.adjustQuality();
+      if (!item.isNormalProduct()) {
         if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
           if (item.sellInIsBelow(11)) {
             item.adjustQuality();
