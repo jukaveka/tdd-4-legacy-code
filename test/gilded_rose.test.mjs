@@ -134,4 +134,10 @@ describe("Gilded Rose", () => {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(8);
   })
+
+  test("Conjured item quality decreases by 4 past sellIn date", () => {
+    const gildedRose = new Shop([new Item("Conjured", -1, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(6);
+  })
 });
