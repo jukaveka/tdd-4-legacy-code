@@ -13,7 +13,7 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop();
     const items = gildedRose.updateQuality();
     expect(items).to.be.a("array").and.to.be.empty;
-  })
+  });
 
   test("quality decreases by 1", () => {
     const gildedRose = new Shop([new Item("foo", 1, 2)]);
@@ -31,7 +31,7 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("foo", -1, 0)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(0);
-  })
+  });
 
   test("sellIn decreases by 1", () => {
     const gildedRose = new Shop([new Item("foo", 1, 0)]);
@@ -43,7 +43,7 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("foo", 1, 0)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(0);
-  })
+  });
 
   test("backstage pass increases with sellIn date left", () => {
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 11, 10)]);
@@ -115,17 +115,17 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 80)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(80);
-  })
+  });
 
   test("Sulfuras doesn't lose quality past sellIn date", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 80)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(80);
-  })
+  });
 
   test("Sulfuras sellIn doesn't decrease", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 5, 80)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(5);
-  })
+  });
 });

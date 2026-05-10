@@ -1,8 +1,8 @@
 export class Item {
   SPECIAL_PRODUCTS = [
-    {name: "Aged Brie", quality: (-1), sellIn: 1},
-    {name: "Backstage passes to a TAFKAL80ETC concert", quality: (-1), sellIn: 1},
-    {name: "Sulfuras, Hand of Ragnaros", quality: 0, sellIn: 0},
+    { name: "Aged Brie", quality: -1, sellIn: 1 },
+    { name: "Backstage passes to a TAFKAL80ETC concert", quality: -1, sellIn: 1 },
+    { name: "Sulfuras, Hand of Ragnaros", quality: 0, sellIn: 0 },
   ];
 
   constructor(name, sellIn, quality) {
@@ -14,9 +14,11 @@ export class Item {
 
   determineAdjustments(name) {
     if (this.SPECIAL_PRODUCTS.map((product) => product.name).includes(this.name)) {
-      return this.SPECIAL_PRODUCTS.filter((product) => product.name === name).map((product) => {return {quality: product.quality, sellIn: product.sellIn}})[0];
+      return this.SPECIAL_PRODUCTS.filter((product) => product.name === name).map((product) => {
+        return { quality: product.quality, sellIn: product.sellIn };
+      })[0];
     } else {
-      return {quality: 1, sellIn: 1};
+      return { quality: 1, sellIn: 1 };
     }
   }
 
@@ -56,7 +58,7 @@ export class Shop {
   updateQuality() {
     this.items.forEach((item) => {
       if (item.isNormalProduct()) {
-          item.adjustQuality();
+        item.adjustQuality();
       } else {
         item.adjustQuality();
         if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
@@ -84,7 +86,7 @@ export class Shop {
           item.adjustQuality();
         }
       }
-    })
+    });
 
     return this.items;
   }
