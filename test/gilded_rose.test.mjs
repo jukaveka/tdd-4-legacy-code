@@ -76,7 +76,7 @@ describe("Gilded Rose", () => {
   });
 
   test("backstage pass loses value past sellIn date", () => {
-    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)]);
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", -1, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(0);
   });
